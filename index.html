@@ -345,9 +345,39 @@
     <script src="lib/isotope/isotope.pkgd.min.js"></script>
     <script src="lib/lightbox/js/lightbox.min.js"></script>
 
-    <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+    
+<script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("Gt1zro3MNwPhLhNm7git");
+  })();
+  
+  document.getElementById('sendMessageButton').addEventListener('click', function(event) {
+    event.preventDefault(); // prevent the form from submitting
+    
+    // get the form data
+    var formData = {
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      subject: document.getElementById('subject').value,
+      message: document.getElementById('message').value
+    };
+    
+    // send the email
+    emailjs.send('service_y3f7skl', 'template_ymsvgoh', formData)
+      .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
+        // show a success message to the user
+        alert('Your message has been sent successfully!');
+      }, function(error) {
+        console.log('FAILED...', error);
+        // show an error message to the user
+        alert('Sorry, there was an error sending your message. Please try again later.');
+      });
+  });
+</script>
+
+  
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
